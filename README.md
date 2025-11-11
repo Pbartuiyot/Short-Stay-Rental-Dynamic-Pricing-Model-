@@ -1,61 +1,71 @@
-# Dynamic Pricing for Airbnb Listings in Boston using Sentiment Analysis (BERT)
 
-# 1. Project Overview
-Airbnb hosts in Boston often struggle with setting the right price for their listings. Improper pricing strategies, poor visibility, and a lack of insight into guest preferences lead to low occupancy rates and missed revenue opportunities. This project uses Natural Language Processing and machine learning to:
+#1. Project Overview
 
-1)	Analyze guest reviews to extract sentiment and key factors influencing satisfaction.
-2)	Understand how listing features and sentiment impact pricing.
-3)	Build a dynamic pricing model to suggest optimal prices for Airbnb hosts.
-4)	Provide data-driven recommendations for improving listing quality and visibility.
-   
-#2. Problem Statement
+Airbnb hosts often struggle to set competitive prices, relying on intuition or static strategies that overlook what guests value. Guest reviews, however, contain rich insights, expressing both overall sentiment and opinions about specific aspects such as cleanliness, amenities, location, and host responsiveness.
+This project combines BERT-based sentiment analysis of guest reviews with listing data to build a dynamic pricing model that recommends optimal Airbnb prices in Boston.
 
-Unlike hotels that benefit from brand loyalty and standardized pricing, Airbnb guests primarily base their booking decisions on user reviews, host behavior, and listing descriptions or features. However, many hosts lack clear insights into the specific factors that guests value most, leading to pricing decisions that are either too high, resulting in vacant bookings or too low, which reduces profitability. Additionally, listings often fail to highlight unique amenities or nearby local attractions that could enhance guest appeal, and there is currently no systematic approach to pricing that integrates guest sentiment, proximity to attractions, or real-time demand trends.
+#2. Objectives
 
-# 3. Objectives
+Primary Objectives:
 
-While key features such as amenities, host responsiveness, and location influence guest satisfaction and dictate the dynamic pricing, the primary objectives of this project include:
-1)	Extract and analyze guest sentiments from Airbnb reviews using Natural Language Processing (NLP) with BERT to classify reviews as positive, neutral, or negative.
-2)	Develop a dynamic pricing model that integrates sentiment scores, listing features, geographical location, and demand trends.
-3)	Generate predictive insights to recommend optimal pricing strategies that maximize both occupancy and profitability.
-   
-# 4. Data Sources
-Data is sourced from InsiderAirbnb.
-There are two datasets
-a)	Listing
-b)	Customer reviewers
+i) Build a production-ready model that recommends data-driven prices for each listing.
 
-To address this issue, I will collect a dataset from an insider website which provides datasets or short-stay rentals across major cities, which offers hosts to list their short-stay rental houses and also allows customers to leave reviews and ratings. The following are characteristics of the data: 
-a)	Listing Details: Title, property type (e.g., apartment, house), number of bedrooms/bathrooms, amenities (e.g., Wi-Fi, pool)
-b)	Pricing: Nightly rate, discounts, service fees
-c)	Location: County, city, or specific coordinates
-d)	Reviews: Ratings, number of reviews, guest comments
-e)	Host Information: Name, response rate, superhost status
-f)	Availability: Booked/unbooked dates.
+ii) Use BERT to extract overall and aspect-level sentiment from guest reviews.
 
-Reviews	Guest comments, ratings, number of reviews
+iii)Quantify how review sentiment and listing features affect price and occupancy.
 
-# 5. Methodology
+iv)Provide host-facing recommendations to improve listing appeal and visibility.
 
-5.1 Data Preprocessing
-•	Remove null values, duplicates, and irrelevant rows.
-•	Convert text to lowercase, remove punctuation, special characters, and emojis.
-•	Tokenization, stopword removal, and lemmatization using NLTK/spaCy.
-•	Encode categorical data (One-Hot Encoding).
-•	Standardize numerical features (price, number of bedrooms).
+#3. Data Sources
 
-5.2 Sentiment Analysis
-•	Pre-trained BERT model to classify reviews:
-o	Negative (-1), Neutral (0), Positive (+1)
-o	Come up with compound score
-•	Compute average sentiment score per listing.
-•	Extract keywords using TF-IDF or topic modelling (LDA).
+a) Listings dataset: Contains attributes of Boston Airbnb properties, including pricing, host details, location, property characteristics, and review scores.
+
+b) Customer Reviews dataset: Contains listing_id and customer comments.
+
+Join key: listing_id — datasets are combined via inner join to ensure modeling only includes listings with both listing details and reviews. One listing may have multiple reviews.
+
+#4. Preprocessing & Feature Engineering
+
+Text preprocessing:
+
+Clean reviews by removing extra spaces and fixing encoding errors.
+
+Keep contractions and informal language (handled by BERT).
+
+Optionally exclude very short reviews.
+
+BERT sentiment analysis:
+
+Fine-tune a pre-trained BERT model (e.g., bert-base-uncased) to predict overall sentiment (negative, neutral, positive) and aspect-level sentiment for features like cleanliness, Wi-Fi, or location.
+
+Output sentiment scores and aspect-polarity pairs per review.
+
+Aggregation & feature engineering:
+
+Aggregate review-level outputs to the listing level: average sentiment, percentage of negative comments on key aspects, number of recent negative mentions, total review volume.
+
+Join aggregated features with the main listings dataset.
+
+Optional additional features: TF-IDF or LDA keywords; compound sentiment score per listing.
+
 <img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/1c3aecd6-ed02-4a4a-8f0f-8404f3c2af94" />
 
-5.3 Machine Learning Model
-•	Combine numerical + encoded categorical + sentiment features.
-•	Train regression models:
+#5. Pricing Model
 
-o	Random Forest Regressor
-o	XGBoost
-o	Gradient Boosting
+Goal: Predict optimal nightly price.
+
+Potential models:
+
+Random Forest Regressor
+
+XGBoost
+
+LightGBM
+
+Gradient Boosting
+
+Loss & metrics:
+
+Primary: MAE, RMSE, MAPE on price
+
+Evaluation goals:
