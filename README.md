@@ -50,7 +50,7 @@ o	Negative (-1), Neutral (0), Positive (+1)
 o	Come up with compound score
 •	Compute average sentiment score per listing.
 •	Extract keywords using TF-IDF or topic modelling (LDA).
-<img width="1900" height="2065" alt="image" src="https://github.com/user-attachments/assets/1c3aecd6-ed02-4a4a-8f0f-8404f3c2af94" />
+<img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/1c3aecd6-ed02-4a4a-8f0f-8404f3c2af94" />
 
 5.3 Machine Learning Model
 •	Combine numerical + encoded categorical + sentiment features.
