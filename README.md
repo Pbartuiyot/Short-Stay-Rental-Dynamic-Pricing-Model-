@@ -1,10 +1,10 @@
 
-#1. Project Overview
+# 1. Project Overview
 
 Airbnb hosts often struggle to set competitive prices, relying on intuition or static strategies that overlook what guests value. Guest reviews, however, contain rich insights, expressing both overall sentiment and opinions about specific aspects such as cleanliness, amenities, location, and host responsiveness.
 This project combines BERT-based sentiment analysis of guest reviews with listing data to build a dynamic pricing model that recommends optimal Airbnb prices in Boston.
 
-#2. Objectives
+# 2. Objectives
 
 Primary Objectives:
 
@@ -16,7 +16,7 @@ iii)Quantify how review sentiment and listing features affect price and occupanc
 
 iv)Provide host-facing recommendations to improve listing appeal and visibility.
 
-#3. Data Sources
+# 3. Data Sources
 
 a) Listings dataset: Contains attributes of Boston Airbnb properties, including pricing, host details, location, property characteristics, and review scores.
 
@@ -24,7 +24,7 @@ b) Customer Reviews dataset: Contains listing_id and customer comments.
 
 Join key: listing_id — datasets are combined via inner join to ensure modeling only includes listings with both listing details and reviews. One listing may have multiple reviews.
 
-#4. Preprocessing & Feature Engineering
+# 4. Preprocessing & Feature Engineering
 
 Text preprocessing:
 
@@ -34,7 +34,7 @@ Keep contractions and informal language (handled by BERT).
 
 Optionally exclude very short reviews.
 
-BERT sentiment analysis:
+# 5. BERT sentiment analysis:
 
 Fine-tune a pre-trained BERT model (e.g., bert-base-uncased) to predict overall sentiment (negative, neutral, positive) and aspect-level sentiment for features like cleanliness, Wi-Fi, or location.
 
@@ -50,7 +50,7 @@ Optional additional features: TF-IDF or LDA keywords; compound sentiment score p
 
 <img width="300" height="500" alt="image" src="https://github.com/user-attachments/assets/1c3aecd6-ed02-4a4a-8f0f-8404f3c2af94" />
 
-#5. Pricing Model
+# 6. Pricing Model
 
 Goal: Predict optimal nightly price.
 
