@@ -19,8 +19,10 @@ iv)Provide host-facing recommendations to improve listing appeal and visibility.
 # 3. Data Sources
 
 a) Listings dataset: Contains attributes of Boston Airbnb properties, including pricing, host details, location, property characteristics, and review scores.
+<img width="1238" height="552" alt="image" src="https://github.com/user-attachments/assets/f58ca44b-2064-43e7-b234-22dc5bde0fb5" />
 
 b) Customer Reviews dataset: Contains listing_id and customer comments.
+<img width="1110" height="330" alt="image" src="https://github.com/user-attachments/assets/7a226787-f226-4ce2-ace0-0482c5707873" />
 
 Join key: listing_id — datasets are combined via inner join to ensure modeling only includes listings with both listing details and reviews. One listing may have multiple reviews.
 
